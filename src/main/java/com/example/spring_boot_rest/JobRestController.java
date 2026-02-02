@@ -17,14 +17,20 @@ public class JobRestController {
     private JobService service;
 
     @GetMapping("jobPosts")
-    public List<JobPost> getAllJobs(){
+    public List<JobPost> getAllJobs() {
         return service.getAllJobs();
     }
 
     @GetMapping("jobPost/{postId}")
-        public JobPost getJob(@PathVariable("postId") int postId){
-            return service.getJob(postId);
-            }
+    public JobPost getJob(@PathVariable("postId") int postId) {
+        return service.getJob(postId);
+    }
+
+    @PostMapping("jobPost")
+    public JobPost addJob(@RequestBody JobPost jobPost){
+        service.addJob(jobPost);
+        return service.getJob(jobPost.getPostId());
+    }
 
 
 }
